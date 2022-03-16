@@ -1,32 +1,23 @@
-import React,{useEffect,useState} from "react";
-import axios from "axios";
-import {Text} from 'react-native'
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
+import {Text} from 'react-native';
 
-function useFecth(url){
+function useFecth(url) {
+  const [data, setData] = useState([]);
 
- const[data,setData]=useState([])
-
- const fetch= async () =>{
-
-     try {
-        
-        const {data:response}=await axios.get(url)
-        setData(response);
-        
-         
-     } catch (error) {
-         <Text>{error.message}</Text>         
-     }
-    
- 
+  const fetch = async () => {
+    try {
+      const {data: response} = await axios.get(url);
+      setData(response);
+    } catch (error) {
+      <Text>{error.message}</Text>;
     }
+  };
 
+  useEffect(() => {
+    fetch();
+  }, []);
 
-    useEffect(()=>{
-        fetch()}
-    ,[])
-
-    return {data}
-
+  return {data};
 }
 export default useFecth;
